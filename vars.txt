@@ -1,0 +1,5 @@
+export PYTHON=/home/alber/web/python/bin
+export PATH=$PYTHON:$PATH
+
+export FLASK_APP=entrypoint:app
+export FLASK_ENV=development
