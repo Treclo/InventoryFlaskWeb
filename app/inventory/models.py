@@ -65,7 +65,7 @@ class Inventory(db.Model, BaseModelMixin):
 			db.session.commit()
 
 	def __repr__(self):
-		return f'Pair({self.machine}, {self.technology})'
+		return 'Pair({self.machine}, {self.technology})'
 
 	def __str__(self):
-		return f'{self.machine}, {self.technology}'
+		return '{self.machine}, {self.technology}'

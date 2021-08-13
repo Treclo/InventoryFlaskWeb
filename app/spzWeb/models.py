@@ -17,10 +17,10 @@ class SpzWeb(db.Model, BaseModelMixin):
 		self.ultimoAcceso = ultimoAcceso
 
 	def __repr__(self):
-		return f'User({self.matricula})'
+		return 'User({self.matricula})'
 
 	def __str__(self):
-		return f'{self.matricula}'
+		return '{self.matricula}'
 
 	def updateDate(self):
 		now = datetime.now()

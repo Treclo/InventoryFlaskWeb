@@ -18,7 +18,7 @@ class SpazioStatus(db.Model, BaseModelMixin):
 		self.date = date
 
 	def __repr__(self):
-		return f'Pair({self.machine}, {self.status})'
+		return 'Pair({self.machine}, {self.status})'
 
 	def __str__(self):
-		return f'{self.status}'
+		return '{self.status}'
