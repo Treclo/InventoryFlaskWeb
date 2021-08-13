@@ -1,6 +1,6 @@
 from sqlalchemy import UniqueConstraint
 from app.db import db, BaseModelMixin
-import datetime
+from datetime import datetime
 
 class SpzWeb(db.Model, BaseModelMixin):
 	__tablename__ = 'UsersSpzIntranet'
@@ -26,3 +26,4 @@ class SpzWeb(db.Model, BaseModelMixin):
 		now = datetime.now()
 		date = now.strftime("%d/%b/%Y")
 		self.ultimoAcceso = date
+		self.save()

@@ -55,7 +55,7 @@
     window.operateEvents = {
         'click .keep': function (e, value, row, index) {
             if (confirm('Se va a prolongar el acceso para: ' + row.matricula)) {
-                axios.delete('/api/v1.0/spz_web/' + row.id);
+                axios.put('/api/v1.0/spz_web/' + row.id);
                 $table.bootstrapTable('refresh');
             }
         }
