@@ -15,4 +15,12 @@ class MQStatusListResource(Resource):
 		result = mqStatusSchema.dump(spazioStatus, many=True)
 		return result
 
+class MQStatusRemoveResource(Resource):
+	def delete(self, machine):
+		toDelete = MQStatus.filter_by_machine(machine)
+		for i in toDelete:
+			i.delete()
+		return 204
+
 api.add_resource(MQStatusListResource, '/api/v1.0/mqStatus/', endpoint='mq_status_list_resource')
+api.add_resource(MQStatusRemoveResource, '/api/v1.0/mqStatus/machine/<machine>', endpoint='mq_status_remove_resource')

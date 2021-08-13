@@ -20,5 +20,5 @@ class BaseModelMixin:
 		return cls.query.get(id)
 
 	@classmethod
-	def simple_filter(cls, **kwargs):
-		return cls.query.filter_by(**kwargs).all()
+	def filter_by_machine(cls, filter):
+		return cls.query.filter_by(machine=filter).all()
