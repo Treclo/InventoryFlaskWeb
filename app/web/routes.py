@@ -54,3 +54,21 @@ def monMQ():
 @web_bp.route('/monTX')
 def monTX():
 	return render_template('monTX.html')
+
+@web_bp.route('/register_user', methods=["GET", "POST"])
+@login_required
+def register_user():
+	if request.method == "GET":
+		return render_template('registerUser.html')
+	user = request.form.get('user')
+	password = request.form.get('user')
+	isAdmin = request.form.get('isAdmin')
+	if (isAdmin == '0'):
+		isAdmin = False
+	else:
+		isAdmin = True
+	if (User.get_by_user(user) is None):
+		user = User(user=user, isAdmin=isAdmin)
+		user.set_password(password)
+		user.save()
+	return redirect(url_for('web_bp.inventario'))
