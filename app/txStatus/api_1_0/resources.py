@@ -26,7 +26,7 @@ class TXStatusRemoveResource(Resource):
 	def post(self, machine):
 		data = request.get_json()
 		now = datetime.now()
-		date = now.strftime("%d/%b/%Y")
+		date = now.strftime("%d/%b/%Y %H:%M")
 		for check in data['checks']:
 			txstatus = TXStatus(machine = machine,
 									resource = check['resource'],

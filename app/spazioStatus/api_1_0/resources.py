@@ -26,7 +26,7 @@ class SpazioStatusRemoveResource(Resource):
 	def post(self, machine):
 		data = request.get_json()
 		now = datetime.now()
-		date = now.strftime("%d/%b/%Y")
+		date = now.strftime("%d/%b/%Y %H:%M")
 		for check in data['checks']:
 			spazioStatus = SpazioStatus(machine = machine,
 									resource = check['resource'],

@@ -27,3 +27,7 @@ class SpzWeb(db.Model, BaseModelMixin):
 		date = now.strftime("%d/%b/%Y")
 		self.ultimoAcceso = date
 		self.save()
+
+	@classmethod
+	def filter_by_t(self, t):
+		return SpzWeb.query.filter_by(matricula=t).first()
