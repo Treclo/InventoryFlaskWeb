@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_restful import Api, Resource
+from datetime import datetime
 from .schemas import SpazioStatusSchema
 from ..models import SpazioStatus
 
@@ -21,6 +22,20 @@ class SpazioStatusRemoveResource(Resource):
 		for i in toDelete:
 			i.delete()
 		return 204
+	
+	def post(self, machine):
+		data = request.get_json()
+		now = datetime.now()
+		date = now.strftime("%d/%b/%Y")
+		for check in data['checks']:
+			spazioStatus = SpazioStatus(machine = machine,
+									resource = check['resource'],
+									status = check['status'],
+									dangerLevel = check['dangerLevel'],
+									problemGroup = check['problemGroup'],
+									date = date)
+			spazioStatus.save()
+		return 201
 
 api.add_resource(SpazioStatusListResource, '/api/v1.0/spazioStatus/', endpoint='spazio_status_list_resource')
 api.add_resource(SpazioStatusRemoveResource, '/api/v1.0/spazioStatus/machine/<machine>', endpoint='spazio_status_remove_resource')

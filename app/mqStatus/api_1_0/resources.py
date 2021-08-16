@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_restful import Api, Resource
+from datetime import datetime
 from .schemas import MQStatusSchema
 from ..models import MQStatus
 
@@ -21,6 +22,20 @@ class MQStatusRemoveResource(Resource):
 		for i in toDelete:
 			i.delete()
 		return 204
+
+	def post(self, machine):
+		data = request.get_json()
+		now = datetime.now()
+		date = now.strftime("%d/%b/%Y")
+		for check in data['checks']:
+			mqstatus = MQStatus(machine = machine,
+									resource = check['resource'],
+									status = check['status'],
+									dangerLevel = check['dangerLevel'],
+									problemGroup = check['problemGroup'],
+									date = date)
+			mqstatus.save()
+		return 201
 
 api.add_resource(MQStatusListResource, '/api/v1.0/mqStatus/', endpoint='mq_status_list_resource')
 api.add_resource(MQStatusRemoveResource, '/api/v1.0/mqStatus/machine/<machine>', endpoint='mq_status_remove_resource')

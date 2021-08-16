@@ -60,15 +60,26 @@ def monTX():
 def register_user():
 	if request.method == "GET":
 		return render_template('registerUser.html')
-	user = request.form.get('user')
-	password = request.form.get('user')
+	user_name = request.form.get('user')
+	password = request.form.get('password')
 	isAdmin = request.form.get('isAdmin')
 	if (isAdmin == '0'):
 		isAdmin = False
 	else:
 		isAdmin = True
-	if (User.get_by_user(user) is None):
-		user = User(user=user, isAdmin=isAdmin)
+	if (User.get_by_user(user_name) is None):
+		user = User(user=user_name, isAdmin=isAdmin)
 		user.set_password(password)
 		user.save()
+	return redirect(url_for('web_bp.inventario'))
+
+@web_bp.route('/change_password', methods=["GET", "POST"])
+@login_required
+def change_password():
+	if request.method == "GET":
+		return render_template('changePassword.html')
+	#password = request.form.get('password')
+	#user = User.get_by_user(current_user)
+	#user.set_password(password)
+	#user.save()
 	return redirect(url_for('web_bp.inventario'))

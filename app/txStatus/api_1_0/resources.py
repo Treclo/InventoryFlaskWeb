@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_restful import Api, Resource
+from datetime import datetime
 from .schemas import TXStatusSchema
 from ..models import TXStatus
 
@@ -21,6 +22,20 @@ class TXStatusRemoveResource(Resource):
 		for i in toDelete:
 			i.delete()
 		return 204
+
+	def post(self, machine):
+		data = request.get_json()
+		now = datetime.now()
+		date = now.strftime("%d/%b/%Y")
+		for check in data['checks']:
+			txstatus = TXStatus(machine = machine,
+									resource = check['resource'],
+									status = check['status'],
+									dangerLevel = check['dangerLevel'],
+									problemGroup = check['problemGroup'],
+									date = date)
+			txstatus.save()
+		return 201
 
 api.add_resource(TXStatusListResource, '/api/v1.0/txStatus/', endpoint='tx_status_list_resource')
 api.add_resource(TXStatusRemoveResource, '/api/v1.0/txStatus/machine/<machine>', endpoint='tx_status_remove_resource')

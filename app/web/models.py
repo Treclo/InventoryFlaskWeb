@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
 	isAdmin = db.Column(db.Boolean, default=False)
 
 	def __repr__(self):
-		return '<User {self.user}>'
+		return self.user
 
 	def save(self):
 		if not self.id:
