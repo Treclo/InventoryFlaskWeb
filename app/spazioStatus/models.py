@@ -2,6 +2,7 @@ from app.db import db, BaseModelMixin
 
 class SpazioStatus(db.Model, BaseModelMixin):
 	__tablename__ = 'SpazioStatus'
+	__bind_key__ = 'SpazioStatus'
 
 	id = db.Column(db.Integer, primary_key=True)
 	machine = db.Column(db.String, nullable=False)

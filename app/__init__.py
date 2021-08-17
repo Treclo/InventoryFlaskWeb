@@ -17,6 +17,11 @@ def create_app():
 
 	app.config['SECRET_KEY'] = '-13=t5&imzf&6jelb@qmpng=k_1^n=33#l=e7^h+#m=v*#w(%7'
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sql'
+	app.config['SQLALCHEMY_BINDS'] = {
+		'SpazioStatus': 'sqlite:///SpazioDatabase.sql',
+		'MQStatus': 'sqlite:///MQDatabase.sql',
+		'TXSeriesStatus': 'sqlite:///TXSeriesDatabase.sql'
+	}
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 	login_manager.init_app(app)
